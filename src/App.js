@@ -1,24 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from "styled-components";
+import reset from "styled-reset";
+import TodoTemplate from "./component/TodoTemplate";
+import TodoInsert from "./component/TodoInsert";
+import TodoList from "./component/TodoList";
+import { useCallback, useRef, useState } from "react";
+
+
+
+const GloabalStyle = createGlobalStyle`
+  ${reset}
+
+  body {
+    background: #e9ecef;
+  }
+`;
 
 function App() {
+
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      text: '공부하기',
+      checked: false
+    },
+    {
+      id: 2,
+      text: '숙제하기',
+      checked: true
+    },
+    {
+      id: 3,
+      text: '운동하기',
+      checked: false
+    },
+  ]);
+
+  const nextId = useRef(4);
+
+  const handleInsert = useCallback((text) => {
+    const todo = {
+      id: nextId.current,
+      // id: uuidv4(),
+      text,
+      checked: false
+    };
+
+    // *배열 추가*
+    // const copyTodos = [...todos];
+    // copyTodos.push(todo);
+    // setTodos(copyTodos);
+
+    setTodos(todos => todos.concat(todo));
+    nextId.current += 1;
+  }, []);
+  
+
+  // *제거*
+  const handleRemove = useCallback((id) => {
+    const copyTodos = [...todos];
+    const otherIndex = todos.findIndex((todo) => todo.id === id);
+    copyTodos.splice(otherIndex, 1)
+    setTodos(copyTodos);
+
+  }, []);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GloabalStyle />
+      <TodoTemplate>
+        <TodoInsert onInsert={handleInsert}/>
+        <TodoList todos={todos} onRemove={handleRemove} />
+      </TodoTemplate>
+    </>
   );
 }
 
