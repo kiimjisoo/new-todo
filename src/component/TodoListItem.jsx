@@ -43,12 +43,14 @@ const Remove =styled.div`
 `;
 
 function TodoListItem(props) {
-  const { todo: {id, text, checked}, onRemove } = props;
+  const { todo: {id, text, checked}, onRemove, onToggle } = props;
 
   return (
     <TodoListItemWrapper>
       
-      <Checkbox>
+      <Checkbox checked={checked}
+        onClick={() => { onToggle(id); }}
+      >
         {checked ? <AiFillCheckCircle/> : <AiOutlineCheckCircle />}
       </Checkbox>
       

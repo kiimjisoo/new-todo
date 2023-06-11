@@ -57,12 +57,29 @@ function App() {
 
   // *제거*
   const handleRemove = useCallback((id) => {
-    const copyTodos = [...todos];
-    const otherIndex = todos.findIndex((todo) => todo.id === id);
-    copyTodos.splice(otherIndex, 1)
-    setTodos(copyTodos);
+  //   const copyTodos = [...todos];
+  //   const otherIndex = todos.findIndex((todo) => todo.id === id);
+  //   copyTodos.splice(otherIndex, 1)
+  //   setTodos(copyTodos);
 
-  }, []);
+  // }, [todos]);
+  setTodos(todos => todos.filter((todo) => todo.id !== id));
+}, []);
+
+
+  const handleToggle = useCallback((id) => {
+  //   const copyTodos = [...todos];
+  //   const target = todos.find((todo) => todo.id === id);
+  //   target.checked = !target.checked;
+  //   const targetIndex = todos.findIndex((todo) => todo.id === id);
+  //   copyTodos[targetIndex] = target;
+  //   setTodos(copyTodos);
+  // }, [todos]);
+
+  setTodos(todos => todos.map((todo) => 
+    todo.id === id ? { ...todo, checked: !todo.checked } : todo
+));
+}, []);
 
 
   return (
@@ -70,7 +87,7 @@ function App() {
       <GloabalStyle />
       <TodoTemplate>
         <TodoInsert onInsert={handleInsert}/>
-        <TodoList todos={todos} onRemove={handleRemove} />
+        <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} />
       </TodoTemplate>
     </>
   );
