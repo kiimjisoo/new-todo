@@ -31,6 +31,8 @@ input
 app.js 에서 데이터 todolist에 넘김
 todolist에서 반복렌더링(.map 사용시 고유 key값 없으면 워닝)
 
+uuid 고유한 값
+
 
 
 1. ui구성
@@ -43,9 +45,14 @@ list에 item들 불러옴
 7. props로 받아온 todos map으로 todolistitem 배열로 변환 (key값)
 8. input 내용 추가 
 9. checkbox true/false 제어
-10. 배열 복사본 만들기 / id비교해 다른 값 제외 새 배열 만들기 / 다른 값 제거 / 새 배열 반환
-11. 
+10. 항목 제거 - 배열 복사본 만들기 / id비교해 다른 값 제외 새 배열 만들기 / 다른 값 제거 / 새 배열 반환
+11. 체크박스 - 배열 복사본 만들기  / id 값 찾음 / 반대 값 넣어줌 / 
+12. count 수량 표시 - button onClick시 count값 +1 / remove onClick시 count값 -1
+
+
+
 
 
 ***
 체크시 항목 변동x(밑줄, 글자 색)
+

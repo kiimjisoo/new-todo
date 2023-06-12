@@ -6,6 +6,17 @@ const TodoListItemWrapper = styled.div`
   padding: 10px;
   display: flex;
   align-items: center;
+
+  .Remove {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-right: 10px;
+    &:hover{
+      color: red;
+    }
+}
 `;
 
 const Checkbox = styled.div`
@@ -31,34 +42,24 @@ const Text = styled.div`
   }
 `;
 
-const Remove =styled.div`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  font-size: 18px;
-  margin-right: 10px;
-  &:hover{
-    color: red;
-  }
-`;
 
-function TodoListItem(props) {
-  const { todo: {id, text, checked}, onRemove, onToggle } = props;
+
+function TodoListItem({ todo, onRemove, onToggle }) {
+  // const { todo: { id, text, checked }, onRemove } = props;
+  const { id, text, checked } = todo;
 
   return (
     <TodoListItemWrapper>
-      
       <Checkbox checked={checked}
         onClick={() => { onToggle(id); }}
       >
         {checked ? <AiFillCheckCircle/> : <AiOutlineCheckCircle />}
       </Checkbox>
-      
       <Text checked={checked}>{text}</Text>
-      
-      <Remove onClick={() => { onRemove(id); } }>
+
+      <div className='Remove' onClick={() => { onRemove(id); }}  >
         <AiFillDelete />
-      </Remove>
+      </div>
 
     </TodoListItemWrapper>
   );

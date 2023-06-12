@@ -33,19 +33,22 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-function TodoInsert({onInsert}) {
+function TodoInsert({ onInsert, count, onCount }) {
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
     setValue(e.target.value)
-  }
+  };
 
   const handleSubmit = (e) => {
     onInsert(value);
     setValue('');
 
     e.preventDefault();
-  }
+
+
+  
+  };
   return (
     <TodoInsertWrapper onSubmit={handleSubmit}>
       <StyledInput 
@@ -55,7 +58,10 @@ function TodoInsert({onInsert}) {
       onChange={handleChange}
       />
 
-      <StyledButton type='submit'>
+      <StyledButton 
+        type='submit'
+        onClick={() => onCount(count + 1)}
+      >
         <Addicon />
       </StyledButton>
 

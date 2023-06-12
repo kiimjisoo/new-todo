@@ -18,16 +18,28 @@ const TodoTemplateWrapper = styled.div`
     align-items: center;
   }
 
+  .count {
+    color: black;
+    display: flex;
+    justify-content: start;
+    font-size: 18px;
+    /* margin-bottom: 15px; */
+    background: #8d8d8d;
+    }
+
   .content {
     background: white;
   }
+
 `;
 
 function TodoTemplate(props) {
-  const { children } = props;
+  const { children, count } = props;
+
   return (
     <TodoTemplateWrapper>
       <div className='app_title'>일정관리</div>
+      <div className='count'>완료:   미완료:   전체:{count}  </div>
       <div className='content'>{children}</div>
     </TodoTemplateWrapper>
   );
