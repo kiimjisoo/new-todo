@@ -33,7 +33,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-function TodoInsert({ onInsert, count, onCount }) {
+function TodoInsert({ onInsert}) {
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
@@ -42,25 +42,33 @@ function TodoInsert({ onInsert, count, onCount }) {
 
   const handleSubmit = (e) => {
     onInsert(value);
-    setValue('');
+    setValue(''); 
 
-    e.preventDefault();
-
-
-  
+  e.preventDefault();     
   };
+  const onData = (e) => {
+    if(!value) {
+      alert('할 일을 입력하세요.')
+      e.preventDefault();
+    }
+  }
+
+
+
+
+
   return (
     <TodoInsertWrapper onSubmit={handleSubmit}>
       <StyledInput 
       type='text' 
-      placeholder='입력하세요' 
+      placeholder='입력하세요.' 
       value={value}
       onChange={handleChange}
       />
 
       <StyledButton 
         type='submit'
-        onClick={() => onCount(count + 1)}
+        onClick={onData}
       >
         <Addicon />
       </StyledButton>

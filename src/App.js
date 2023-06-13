@@ -22,17 +22,20 @@ function App() {
     {
       id: 1,
       text: '공부하기',
-      checked: false
+      checked: false,
+      pin: false
     },
     {
       id: 2,
       text: '숙제하기',
-      checked: true
+      checked: true,
+      pin: false
     },
     {
       id: 3,
       text: '운동하기',
-      checked: false
+      checked: false,
+      pin: false
     },
   ]);
 
@@ -42,7 +45,8 @@ function App() {
     const todo = {
       id: nextId.current,
       text,
-      checked: false
+      checked: false,
+      pin: false
     };
 
     // *배열 추가*
@@ -68,23 +72,59 @@ function App() {
     target.checked = !target.checked;
     const targetIndex = todos.findIndex((todo) => todo.id === id);
     copyTodos[targetIndex] = target;
+    setTodos(copyTodos);    
+  }, [todos]);
+
+  // copytodos index수 따라 완료값 변경
+  // todos.length  전체 개수 나옴
+
+  const [complete, setComplete] = useState(1);
+  const [noComplete, setNoComplete] = useState(2);
+
+  // const handleComplete = () => {
+  //   {checked ? complete + 1 : complete - 1}
+  // }  
+
+  const handlePin = useCallback((id) => {
+    const copyTodos = [...todos];
+    const target =  todos.find((todo) => todo.id === id);
+    target.pin = !target.pin;
+    const targetIndex = todos.findIndex((todo) => todo.id === id);
+    copyTodos[targetIndex] = target;
+    setTodos(copyTodos);    
+  }, [todos]);
+  
+
+
+  // 필터로 pin값이 true 추출 후 unshift로 배열의 시작에 요소 추가
+  // 기존값 삭제 없이 상단에 추가
+  // 두번째 항목 선택해도 이전 항목 재 업로드
+  // 핀 누를때마다 항목 추가
+  // pop 배열의 마지막 요소를 제거 제거된 요소 반환
+
+  const handleTestPin = useCallback((id) => {
+    const copyTodos = [...todos];
+    const target = todos.find((todo) => todo.id === id);
+    
+    copyTodos.unshift(target);
+    copyTodos.pop(target)
     setTodos(copyTodos);
   }, [todos]);
 
 
-  const [count, setCount] = useState(0);
-  const handleCount = (e) => {
-    setCount(Number(e.target.value));
-  };
 
+console.log(todos);
 
-  
   return (
     <>
       <GloabalStyle />
-      <TodoTemplate count={count}>
-        <TodoInsert onInsert={handleInsert} onCount={handleCount} count={count} />
-        <TodoList todos={todos} onRemove={handleRemove} onToggle={handleToggle} />
+      <TodoTemplate todos={todos} complete={complete} noComplete={noComplete} >
+        <TodoInsert onInsert={handleInsert} />
+
+        <TodoList todos={todos} 
+        onRemove={handleRemove} onToggle={handleToggle} onChangePin={handlePin} 
+        onTestPin={handleTestPin}
+        />
       </TodoTemplate>
     </>
   );

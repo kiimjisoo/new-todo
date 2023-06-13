@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { AiFillCheckCircle, AiOutlineCheckCircle, AiFillDelete } from "react-icons/ai";
+import { AiFillCheckCircle, AiOutlineCheckCircle, AiFillDelete, AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
 
 const TodoListItemWrapper = styled.div`
   padding: 10px;
@@ -16,7 +16,8 @@ const TodoListItemWrapper = styled.div`
     &:hover{
       color: red;
     }
-}
+  }
+  
 `;
 
 const Checkbox = styled.div`
@@ -30,7 +31,7 @@ const Checkbox = styled.div`
 `;
 
 const Text = styled.div`
-  flex: 1;
+  flex: 0.8;
   margin-left: 20px;
   cursor: pointer;
 
@@ -41,28 +42,43 @@ const Text = styled.div`
   `
   }
 `;
+const Pin = styled.div`
+  flex: 2.5;
+  cursor: pointer;
+  font-size: 18px;
+  /* ${props => props.pin &&
+    css`
+      background: red;
+    `
+  } */
+`;
 
 
 
-function TodoListItem({ todo, onRemove, onToggle }) {
+
+function TodoListItem({ todo, onRemove, onToggle,onChangePin, onTestPin }) {
   // const { todo: { id, text, checked }, onRemove } = props;
-  const { id, text, checked } = todo;
+  const { id, text, checked, pin } = todo;
 
   return (
     <TodoListItemWrapper>
-      <Checkbox checked={checked}
-        onClick={() => { onToggle(id); }}
-      >
+      <Checkbox checked={checked} onClick={() => { onToggle(id); }}>
         {checked ? <AiFillCheckCircle/> : <AiOutlineCheckCircle />}
       </Checkbox>
+      
       <Text checked={checked}>{text}</Text>
 
-      <div className='Remove' onClick={() => { onRemove(id); }}  >
+      <Pin pin={pin} onClick={() => { onChangePin(id); onTestPin(id); }}>
+        {pin ? <AiFillPushpin /> : <AiOutlinePushpin />}
+      </Pin>
+
+      <div className='Remove' onClick={() => { onRemove(id); }} >
         <AiFillDelete />
       </div>
 
     </TodoListItemWrapper>
   );
-}
 
+}
+;
 export default TodoListItem;

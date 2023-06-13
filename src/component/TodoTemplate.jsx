@@ -34,12 +34,12 @@ const TodoTemplateWrapper = styled.div`
 `;
 
 function TodoTemplate(props) {
-  const { children, count } = props;
+  const { children, complete, todos, noComplete } = props;
 
   return (
     <TodoTemplateWrapper>
       <div className='app_title'>일정관리</div>
-      <div className='count'>완료:   미완료:   전체:{count}  </div>
+      <div className='count'>완료: {complete}  미완료: {noComplete}  전체: {todos.length} </div>
       <div className='content'>{children}</div>
     </TodoTemplateWrapper>
   );

@@ -9,7 +9,7 @@ const TodoListWrapper = styled.div`
 `;
 
 function TodoList(props) {
-  const { todos, onRemove, onToggle } = props;
+  const { todos, onRemove, onToggle, onChangePin, onTestPin} = props;
 
   
   return (
@@ -19,7 +19,11 @@ function TodoList(props) {
       <TodoListItem /> */}
 
       {todos.map((todos) =>  {
-        return <TodoListItem  key={todos.id} todo={todos} onRemove={onRemove} onToggle={onToggle} />
+        return <TodoListItem  
+          key={todos.id} todo={todos} 
+            onRemove={onRemove} onToggle={onToggle} 
+            onChangePin={onChangePin} onTestPin={onTestPin}
+        />
       })}
     </TodoListWrapper> 
   );
