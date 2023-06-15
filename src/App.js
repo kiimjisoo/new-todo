@@ -57,8 +57,7 @@ function App() {
   }, [todos]);
   
 
-
-  // *제거*
+// *제거*
   const handleRemove = useCallback((id) => {
     const copyTodos = [...todos];
     const otherIndex = todos.findIndex((todo) => todo.id === id);
@@ -76,18 +75,6 @@ function App() {
     setTodos(copyTodos);    
   }, [todos]);
 
-
-
-
-
-
-  const [complete, setComplete] = useState(1);
-  const [noComplete, setNoComplete] = useState(2);
-
-  // const handleComplete = () => {
-  //   {checked ? complete + 1 : complete - 1}
-  // }  
-
 // pin 토글
   const handlePinToggle = useCallback((id) => {
     const copyTodos = [...todos];
@@ -100,7 +87,6 @@ function App() {
   
 
   // pin 상단 고정
-
   const handleTestPin = useCallback((id) => {
     const copyTodos = [...todos];
     const target = todos.find((todo) => todo.id === id);
@@ -110,6 +96,28 @@ function App() {
     setTodos(copyTodos);   
   }, [todos]);
 
+
+
+  const [complete, setComplete] = useState(1);
+  const [noComplete, setNoComplete] = useState(2);
+
+  const handleComplete = (e) => {
+    setComplete(Number(e));
+  };
+  const handleNoComplete = (e) => {
+    setNoComplete(Number(e));
+  }
+
+  
+
+
+
+
+
+
+
+  
+
   return (
     <>
       <GloabalStyle />
@@ -118,7 +126,8 @@ function App() {
 
         <TodoList todos={todos} 
         onRemove={handleRemove} onToggle={handleToggle} onTogglePin={handlePinToggle} 
-        onTestPin={handleTestPin}
+        onTestPin={handleTestPin} onComplete={handleComplete} complete={complete}
+        onNoComplete={handleNoComplete} noComplete={noComplete}
         />
       </TodoTemplate>
     </>

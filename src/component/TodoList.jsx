@@ -10,12 +10,11 @@ const TodoListWrapper = styled.div`
 
 
 function TodoList(props) {
-  const { todos, onRemove, onToggle, onTogglePin, onTestPin } = props;
+  const { todos, onRemove, onToggle, onTogglePin, onTestPin, onComplete, complete, onNoComplete, noComplete } = props;
 
   
   return (
     <TodoListWrapper>
-      <div className='DoText'>할 일</div>
       {/* <TodoListItem />
       <TodoListItem />
       <TodoListItem /> */}
@@ -25,6 +24,8 @@ function TodoList(props) {
           key={todos.id} todo={todos} 
             onRemove={onRemove} onToggle={onToggle} 
             onTogglePin={onTogglePin} onTestPin={onTestPin} 
+            onComplete={onComplete} complete={complete}
+            onNoComplete={onNoComplete} noComplete={noComplete}
             />
       })}
     </TodoListWrapper> 

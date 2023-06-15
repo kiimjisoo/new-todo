@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import { AiFillCheckCircle, AiOutlineCheckCircle, AiFillDelete, AiFillPushpin, AiOutlinePushpin } from "react-icons/ai";
+import { AiFillCheckCircle, AiOutlineCheckCircle, AiFillDelete, AiFillPushpin, AiOutlinePushpin, AiTwotoneEdit } from "react-icons/ai";
+import TodoModify from './TodoModify';
 
 const TodoListItemWrapper = styled.div`
   padding: 10px;
@@ -52,18 +53,29 @@ const Pin = styled.div`
     `
   } */
 `;
+const Change = styled.div`
+  display: flex;
+  margin-right: 20px;
+  cursor: pointer;
+`;
 
 
 
 
-function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin }) {
-  // const { todo: { id, text, checked }, onRemove } = props;
+function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, onComplete, complete, onNoComplete, noComplete }) {
+
   const { id, text, checked, pin } = todo;
 
   return (
     <TodoListItemWrapper>
-      <Checkbox checked={checked} onClick={() => { onToggle(id); }}>
-        {checked ? <AiFillCheckCircle/> : <AiOutlineCheckCircle />}
+      <Checkbox checked={checked} 
+      onClick={() => { onToggle(id); }}
+      
+      >
+        {checked ? 
+        <AiFillCheckCircle onClick={() => (onComplete(complete -1 ), onNoComplete(noComplete + 1) )}/> : 
+        <AiOutlineCheckCircle onClick={() => (onComplete(complete + 1), onNoComplete(noComplete - 1) )} />
+        }
       </Checkbox>
       
       <Text checked={checked}>{text}</Text>
@@ -71,7 +83,8 @@ function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin }) {
       <Pin pin={pin} onClick={() => { onTogglePin(id); onTestPin(id); }}>
         {pin ? <AiFillPushpin /> : <AiOutlinePushpin  />}
       </Pin>
-      <div className='Remove' onClick={() => { onRemove(id); }} >
+
+      <div className='Remove' onClick={() => { onRemove(id); onComplete(complete - 1); onNoComplete(noComplete - 1); }} >
         <AiFillDelete />
       </div>
 
