@@ -8,12 +8,14 @@ const TodoListWrapper = styled.div`
   overflow-y: auto;
 `;
 
+
 function TodoList(props) {
-  const { todos, onRemove, onToggle, onChangePin, onTestPin} = props;
+  const { todos, onRemove, onToggle, onTogglePin, onTestPin } = props;
 
   
   return (
     <TodoListWrapper>
+      <div className='DoText'>할 일</div>
       {/* <TodoListItem />
       <TodoListItem />
       <TodoListItem /> */}
@@ -22,8 +24,8 @@ function TodoList(props) {
         return <TodoListItem  
           key={todos.id} todo={todos} 
             onRemove={onRemove} onToggle={onToggle} 
-            onChangePin={onChangePin} onTestPin={onTestPin}
-        />
+            onTogglePin={onTogglePin} onTestPin={onTestPin} 
+            />
       })}
     </TodoListWrapper> 
   );

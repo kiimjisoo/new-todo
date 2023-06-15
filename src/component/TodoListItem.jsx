@@ -56,7 +56,7 @@ const Pin = styled.div`
 
 
 
-function TodoListItem({ todo, onRemove, onToggle,onChangePin, onTestPin }) {
+function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin }) {
   // const { todo: { id, text, checked }, onRemove } = props;
   const { id, text, checked, pin } = todo;
 
@@ -68,10 +68,9 @@ function TodoListItem({ todo, onRemove, onToggle,onChangePin, onTestPin }) {
       
       <Text checked={checked}>{text}</Text>
 
-      <Pin pin={pin} onClick={() => { onChangePin(id); onTestPin(id); }}>
-        {pin ? <AiFillPushpin /> : <AiOutlinePushpin />}
+      <Pin pin={pin} onClick={() => { onTogglePin(id); onTestPin(id); }}>
+        {pin ? <AiFillPushpin /> : <AiOutlinePushpin  />}
       </Pin>
-
       <div className='Remove' onClick={() => { onRemove(id); }} >
         <AiFillDelete />
       </div>

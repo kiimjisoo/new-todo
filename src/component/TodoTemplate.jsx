@@ -2,7 +2,7 @@ import React, { Children } from 'react';
 import styled from 'styled-components';
 
 const TodoTemplateWrapper = styled.div`
-  width: 600px;
+  width: 550px;
   margin: 0 auto;
   margin-top: 80px;
   border-radius: 4px;
@@ -42,6 +42,7 @@ function TodoTemplate(props) {
       <div className='count'>완료: {complete}  미완료: {noComplete}  전체: {todos.length} </div>
       <div className='content'>{children}</div>
     </TodoTemplateWrapper>
+
   );
 }
 
