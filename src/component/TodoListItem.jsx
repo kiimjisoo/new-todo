@@ -52,14 +52,25 @@ const Pin = styled.div`
     `
   } */
 `;
+const TodayStyle = styled.div`
+  display: flex;
+`;
+const TodayYear = styled.div``;
+const TodayMonthnDate = styled.div``;
 
 
 
 
-
-function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, onComplete, complete, onNoComplete, noComplete }) {
-
+function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, 
+  onComplete, complete, onNoComplete, noComplete, month, day }) {
+    console.log(month);
   const { id, text, checked, pin } = todo;
+  const today = new Date();
+  const todayMonth = today.getMonth();
+  const todayYear = today.getFullYear();
+  const todayDate = today.getDate();
+  const todayDay = today.getDay();
+  const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 
   return (
     <TodoListItemWrapper>
@@ -68,8 +79,8 @@ function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, onComp
       
       >
         {checked ? 
-        <AiFillCheckCircle onClick={() => (onComplete(complete -1 ), onNoComplete(noComplete + 1) )}/> : 
-        <AiOutlineCheckCircle onClick={() => (onComplete(complete + 1), onNoComplete(noComplete - 1) )} />
+          <AiFillCheckCircle onClick={() => (onComplete(complete -1 ), onNoComplete(noComplete + 1) )}/> : 
+          <AiOutlineCheckCircle onClick={() => (onComplete(complete + 1), onNoComplete(noComplete - 1) )} />
         }
       </Checkbox>
       
@@ -79,7 +90,19 @@ function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, onComp
         {pin ? <AiFillPushpin /> : <AiOutlinePushpin  />}
       </Pin>
 
-      <div className='Remove' onClick={() => { onRemove(id); onComplete(complete - 1); onNoComplete(noComplete - 1); }} >
+      {/* <TodayStyle>
+      <TodayYear>{todayYear}년 </TodayYear>
+      <TodayMonthnDate>
+        {month}월 {day}일 {DAYS[todayDay]}요일
+      </TodayMonthnDate>
+    </TodayStyle> */}
+
+      <div className='Remove' onClick={() => 
+          { onRemove(id); 
+          {checked ? 
+            onComplete(complete - 1) : 
+            onNoComplete(noComplete - 1);
+            }}} >
         <AiFillDelete />
       </div>
 

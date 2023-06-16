@@ -97,7 +97,7 @@ function App() {
   }, [todos]);
 
 
-
+// 개수
   const [complete, setComplete] = useState(1);
   const [noComplete, setNoComplete] = useState(2);
 
@@ -108,26 +108,36 @@ function App() {
     setNoComplete(Number(e));
   }
 
-  
+// 날짜
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
 
+  const handleMonthChange = (e) => {
+    setMonth(e.target.value)
+  };
+  const handleDatChange = (e) => {
+    setDay(e.target.value)
 
+  };
+  console.log(month);
 
-
-
-
-
-  
 
   return (
     <>
       <GloabalStyle />
       <TodoTemplate todos={todos} complete={complete} noComplete={noComplete} >
-        <TodoInsert onInsert={handleInsert} />
+        <TodoInsert onInsert={handleInsert} 
+        onNoComplete={handleNoComplete} noComplete={noComplete} 
+        month={month} day={day}
+        onMonthChange={handleMonthChange} onDayChange={handleDatChange}
+        />
 
         <TodoList todos={todos} 
-        onRemove={handleRemove} onToggle={handleToggle} onTogglePin={handlePinToggle} 
-        onTestPin={handleTestPin} onComplete={handleComplete} complete={complete}
+        onRemove={handleRemove} onToggle={handleToggle} 
+        onTogglePin={handlePinToggle} onTestPin={handleTestPin} 
+        onComplete={handleComplete} complete={complete}
         onNoComplete={handleNoComplete} noComplete={noComplete}
+        month={month} day={day}
         />
       </TodoTemplate>
     </>
