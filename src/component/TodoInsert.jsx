@@ -22,7 +22,7 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyleSelect = styled.select`
+const DayInput = styled.input`
   background: none;
   outline: none;
   border: none;
@@ -31,7 +31,7 @@ const StyleSelect = styled.select`
   line-height: 1.5;
   color: black;
   /* flex: 1; */
-  width: 80px;
+  /* width: 80px; */
   `;
 
 const StyledButton = styled.button`
@@ -47,80 +47,45 @@ const StyledButton = styled.button`
 
 
 
-function TodoInsert({ onInsert, onNoComplete, noComplete, day, month, onDayChange, onMonthChange}) {
+function TodoInsert({ todos, onInsert, day, month, onDayChange, onMonthChange}) {
+
   const [value, setValue] = useState('');
 
   const handleChange = (e) => {
     setValue(e.target.value)
   };
 
-  const handleSubmit = (e) => {
-    onInsert(value);
-    setValue(''); 
-
-  e.preventDefault();     
+  const onData = (e) => {
+    value.length < 3 ? alert('할 일을 입력하세요') : handleSubmit();
   };
 
-  const onData = (e) => {
-    if(!value) {
-      alert('할 일을 입력하세요.')
-      e.preventDefault();
-    }
-  }
+  const handleSubmit = (e) => {
+    onInsert(value);
+    setValue('');      
+    e.preventDefault();     
+  };
 
 
-console.log(month);
+
 
   return (
     <TodoInsertWrapper onSubmit={handleSubmit}>
       <StyledInput 
-      type='text' 
-      placeholder='입력하세요.' 
-      value={value}
-      onChange={handleChange}
+        type='text' 
+        placeholder='입력하세요.' 
+        value={value}
+        onChange={handleChange}
       />
-    <StyleSelect 
-      onSubmit={handleSubmit}
-      name={month}
-      value={month}
-      onChange={onMonthChange}>
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-    </StyleSelect>
-
-    <StyleSelect 
-      onSubmit={handleSubmit}
-      name="day"
-      value={day}
-      onChange={onDayChange}>
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option> 
-      </StyleSelect>
+      <DayInput 
+        type='date'
+        id='month'
+        name='date'
+      />
 
       <StyledButton 
         type='submit'
-        onClick={() => (onData, onNoComplete(noComplete + 1) )} 
+        // value={submit}
+        onClick={(e) => {onData()}} 
       >
         <Addicon />
       </StyledButton>

@@ -10,7 +10,7 @@ const TodoListWrapper = styled.div`
 
 
 function TodoList(props) {
-  const { todos, onRemove, onToggle, onTogglePin, onTestPin, onComplete, complete, onNoComplete, noComplete } = props;
+  const { todos, onRemove, onToggle, onTogglePin, onTestPin, month } = props;
 
   
   return (
@@ -21,11 +21,13 @@ function TodoList(props) {
 
       {todos.map((todos) =>  {
         return <TodoListItem  
-          key={todos.id} todo={todos} 
-            onRemove={onRemove} onToggle={onToggle} 
-            onTogglePin={onTogglePin} onTestPin={onTestPin} 
-            onComplete={onComplete} complete={complete}
-            onNoComplete={onNoComplete} noComplete={noComplete}
+          key={todos.id} 
+          todo={todos} 
+          onRemove={onRemove} 
+          onToggle={onToggle} 
+          onTogglePin={onTogglePin} 
+          onTestPin={onTestPin}
+          month={month}
             />
       })}
     </TodoListWrapper> 

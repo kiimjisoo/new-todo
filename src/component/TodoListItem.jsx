@@ -61,10 +61,9 @@ const TodayMonthnDate = styled.div``;
 
 
 
-function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, 
-  onComplete, complete, onNoComplete, noComplete, month, day }) {
-    console.log(month);
+function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin, month, day }) {
   const { id, text, checked, pin } = todo;
+
   const today = new Date();
   const todayMonth = today.getMonth();
   const todayYear = today.getFullYear();
@@ -78,10 +77,7 @@ function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin,
       onClick={() => { onToggle(id); }}
       
       >
-        {checked ? 
-          <AiFillCheckCircle onClick={() => (onComplete(complete -1 ), onNoComplete(noComplete + 1) )}/> : 
-          <AiOutlineCheckCircle onClick={() => (onComplete(complete + 1), onNoComplete(noComplete - 1) )} />
-        }
+        {checked ? <AiFillCheckCircle/> : <AiOutlineCheckCircle />}
       </Checkbox>
       
       <Text checked={checked}>{text}</Text>
@@ -90,19 +86,14 @@ function TodoListItem({ todo, onRemove, onToggle, onTogglePin, onTestPin,
         {pin ? <AiFillPushpin /> : <AiOutlinePushpin  />}
       </Pin>
 
-      {/* <TodayStyle>
+      <TodayStyle>
       <TodayYear>{todayYear}년 </TodayYear>
       <TodayMonthnDate>
         {month}월 {day}일 {DAYS[todayDay]}요일
       </TodayMonthnDate>
-    </TodayStyle> */}
+    </TodayStyle>
 
-      <div className='Remove' onClick={() => 
-          { onRemove(id); 
-          {checked ? 
-            onComplete(complete - 1) : 
-            onNoComplete(noComplete - 1);
-            }}} >
+      <div className='Remove' onClick={() => { onRemove(id); }} >
         <AiFillDelete />
       </div>
 
