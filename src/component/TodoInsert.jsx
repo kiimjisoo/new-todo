@@ -55,38 +55,37 @@ function TodoInsert({ todos, onInsert, day, month, onDayChange, onMonthChange}) 
     setValue(e.target.value)
   };
 
-  const onData = (e) => {
-    value.length < 3 ? alert('할 일을 입력하세요') : handleSubmit();
-  };
 
   const handleSubmit = (e) => {
+    if(!value) {
+      alert('할 일을 입력하세요.');
+      return; // 함수 종료!!
+    }
     onInsert(value);
     setValue('');      
     e.preventDefault();     
   };
 
 
-
+console.log(value);
 
   return (
     <TodoInsertWrapper onSubmit={handleSubmit}>
+      
       <StyledInput 
         type='text' 
         placeholder='입력하세요.' 
         value={value}
         onChange={handleChange}
       />
+
       <DayInput 
         type='date'
         id='month'
         name='date'
       />
 
-      <StyledButton 
-        type='submit'
-        // value={submit}
-        onClick={(e) => {onData()}} 
-      >
+      <StyledButton type='submit'>
         <Addicon />
       </StyledButton>
 

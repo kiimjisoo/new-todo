@@ -114,7 +114,9 @@ function App() {
   return (
     <>
       <GloabalStyle />
+
       <TodoTemplate todos={todos} >
+
         <TodoInsert 
         todos={todos}
         onInsert={handleInsert} 
@@ -125,11 +127,14 @@ function App() {
         />
 
         <TodoList 
-        todos={todos} 
-        onRemove={handleRemove} onToggle={handleToggle} 
-        onTogglePin={handlePinToggle} onTestPin={handleTestPin}
-        month={month} day={day}
+          todos={todos} 
+          onRemove={handleRemove} 
+          onToggle={handleToggle} 
+          onTogglePin={handlePinToggle} 
+          onTestPin={handleTestPin}
+          month={month} day={day}
         />
+        
       </TodoTemplate>
     </>
   );

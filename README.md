@@ -66,8 +66,9 @@ list에 item들 불러옴
 
 ***
 완료 미완료 filter사용 
-
-input date 변경 select X
-
 유효성 검사 다시
 (insert 전 유효성 검사 순서 바꿔야 함)
+__return; = 함수 종료__
+
+
+input date 변경 select 
