@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { AiFillCheckCircle, AiOutlineCheckCircle, AiFillDelete, AiFillPushpin, AiOutlinePushpin, AiTwotoneEdit } from "react-icons/ai";
-import TodoModify from './TodoModify';
 
 const TodoListItemWrapper = styled.div`
   padding: 10px;
@@ -53,11 +52,7 @@ const Pin = styled.div`
     `
   } */
 `;
-const Change = styled.div`
-  display: flex;
-  margin-right: 20px;
-  cursor: pointer;
-`;
+
 
 
 
